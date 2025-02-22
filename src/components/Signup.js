@@ -1,13 +1,16 @@
 import React, { useState } from "react";
-import {Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const Signup = (props) => {
   const [credentials, setCredentials] = useState({ name: "", email: "", password: "", cpassword: "" });
-
   let navigate = useNavigate();
 
-  //const host = "http://localhost:5000";
   const API_URL = process.env.REACT_APP_BACKEND_URL;
+
+  const validatePassword = (password) => {
+    const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+    return passwordRegex.test(password);
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -15,6 +18,11 @@ const Signup = (props) => {
 
     if (password !== cpassword) {
       props.showAlert("Passwords do not match", "danger");
+      return;
+    }
+
+    if (!validatePassword(password)) {
+      props.showAlert("Password must be at least 8 characters long, contain uppercase, lowercase, a number, and a special character.", "danger");
       return;
     }
 
@@ -30,7 +38,6 @@ const Signup = (props) => {
     console.log(json);
 
     if (json.success) {
-      // save the auth token and redirect
       localStorage.setItem("token", json.authToken);
       navigate("/");
       props.showAlert("Account created successfully", "success");
@@ -50,27 +57,19 @@ const Signup = (props) => {
           <h3 className="text-center mb-4">Sign Up</h3>
           <form onSubmit={handleSubmit}>
             <div className="mb-3">
-              <label htmlFor="name" className="form-label">
-                Full Name
-              </label>
+              <label htmlFor="name" className="form-label">Full Name</label>
               <input type="text" className="form-control bg-secondary text-light border-info" id="name" name="name" placeholder="Enter your name" onChange={onChange} required />
             </div>
             <div className="mb-3">
-              <label htmlFor="email" className="form-label">
-                Email Address
-              </label>
+              <label htmlFor="email" className="form-label">Email Address</label>
               <input type="email" className="form-control bg-secondary text-light border-info" id="email" name="email" placeholder="Enter your email" onChange={onChange} required />
             </div>
             <div className="mb-3">
-              <label htmlFor="password" className="form-label">
-                Password
-              </label>
+              <label htmlFor="password" className="form-label">Password</label>
               <input type="password" className="form-control bg-secondary text-light border-info" id="password" name="password" placeholder="Enter your password" onChange={onChange} required autoComplete="on" />
             </div>
             <div className="mb-3">
-              <label htmlFor="cpassword" className="form-label">
-                Confirm Password
-              </label>
+              <label htmlFor="cpassword" className="form-label">Confirm Password</label>
               <input type="password" className="form-control bg-secondary text-light border-info" id="cpassword" name="cpassword" placeholder="Confirm your password" onChange={onChange} required autoComplete="on" />
             </div>
             <div className="text-center d-flex gap-2">
@@ -80,8 +79,8 @@ const Signup = (props) => {
           </form>
         </div>
         <div className="container">
-              <p className="text-light mt-3">Have an account? <Link to="/login" className="text-primary">Login here</Link></p>
-          </div>
+          <p className="text-light mt-3">Have an account? <Link to="/login" className="text-primary">Login here</Link></p>
+        </div>
       </div>
     </div>
   );
