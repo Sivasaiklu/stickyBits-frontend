@@ -3,8 +3,8 @@ import {Link, useLocation, useNavigate } from "react-router-dom";
 
 export default function NavBar() {
 
-  const host = "http://localhost:5000";
-
+  //const host = "http://localhost:5000";
+  const API_URL = process.env.REACT_APP_BACKEND_URL;
 
   const [userdata, setUserdata] = useState("");
   let navigate = useNavigate();
@@ -17,7 +17,7 @@ export default function NavBar() {
   }
 
   const handleProfile = async () => {
-    const response = await fetch(`${host}/api/auth/getuser`, {
+    const response = await fetch(`${API_URL}/api/auth/getuser`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

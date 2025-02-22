@@ -6,8 +6,8 @@ const Signup = (props) => {
 
   let navigate = useNavigate();
 
-  const host = "http://localhost:5000";
-
+  //const host = "http://localhost:5000";
+  const API_URL = process.env.REACT_APP_BACKEND_URL;
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -18,7 +18,7 @@ const Signup = (props) => {
       return;
     }
 
-    const response = await fetch(`${host}/api/auth/createuser`, {
+    const response = await fetch(`${API_URL}/api/auth/createuser`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
