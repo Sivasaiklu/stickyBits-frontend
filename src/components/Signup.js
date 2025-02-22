@@ -22,7 +22,7 @@ const Signup = (props) => {
     }
 
     if (!validatePassword(password)) {
-      props.showAlert("Password must be at least 8 characters long, contain uppercase, lowercase, a number, and a special character.", "danger");
+      props.showAlert("Password: 8+ chars, mix of letters & symbols.", "danger");
       return;
     }
 
