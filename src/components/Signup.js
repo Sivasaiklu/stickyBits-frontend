@@ -22,7 +22,7 @@ const Signup = (props) => {
     }
 
     if (!validatePassword(password)) {
-      props.showAlert("Password: 8+ chars, mix of letters & symbols.", "danger");
+      props.showAlert("Password: 8+ mix chars", "danger");
       return;
     }
 
