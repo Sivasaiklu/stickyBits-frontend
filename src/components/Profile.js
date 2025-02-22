@@ -67,9 +67,7 @@ export default function Profile() {
               <p className="card-text">
                 <strong className="text-light">Account Created On:</strong> <span style={{ color: "lightblue" }}>{formattedDate} at {formattedTime}</span>
               </p>
-              <button className="btn btn-danger mt-3 w-100" onClick={deleteUser}>
-                🗑️ Delete Account
-              </button>
+              <button className="btn btn-danger mt-3 w-100" onClick={deleteUser}><span><i class="fa-solid fa-trash-can"></i></span> Delete Account</button>
             </div>
           ) : (
             <p className="text-danger text-center">No user data found. Please try again.</p>
