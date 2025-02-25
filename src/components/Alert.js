@@ -10,24 +10,17 @@ export default function Alert(props) {
   };
 
   return (
-    <div 
-      style={{ 
-        height: '100vh', // Full viewport height
-        display: 'flex',
-        justifyContent: 'center', // Center horizontally
-        alignItems: 'center', // Center vertically
-      }}
-    >
+    <div className='d-flex align-items-center justify-content-center m-2' style={{ height: '50px' }}>
       {props.alert && (
         <div
           style={{
-            width: '90%', 
-            maxWidth: '400px',
-            wordBreak: 'break-word',
-            whiteSpace: 'normal',
-            overflowWrap: 'break-word',
+            width: '90%', // Adjust width for mobile screens
+            maxWidth: '400px', // Optional: Limit max width
+            wordBreak: 'break-word', // Ensure long words wrap
+            whiteSpace: 'normal', // Ensure text wraps properly
+            overflowWrap: 'break-word', // Break words correctly
           }}
-          className={`alert alert-${props.alert.type} alert-dismissible fade show text-center p-3`} 
+          className={`alert alert-${props.alert.type} alert-dismissible fade show h-100 d-flex flex-wrap m-3 p-2`} // Added `flex-wrap` for responsiveness
           role="alert"
         >
           <strong>{capitalize(props.alert.type)}</strong>: {props.alert.msg}
